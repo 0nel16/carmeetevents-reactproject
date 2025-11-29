@@ -1,0 +1,65 @@
+:root {
+  --brand-gray: #333;
+  --text-color: var(--brand-gray);
+  --text-on-dark-color: #fff;
+  --primary-color: #267365;
+  --primary-dark-color: color-mix(in srgb, var(--primary-color) 50%, #000);
+  --primary-light-color: color-mix(in srgb, var(--primary-color) 50%, #fff);
+  --secondary-color: #F2CB05;
+
+  --highlight-color: #F23030;
+  --highlight-light-color: #F28705;
+  --highlight-lighter-color: #F29F05;
+
+}
+
+html {
+  color: var(--text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+
+  font-size: 1.6rem;
+}
+
+:link {
+  color: var(--primary-color);
+
+  &:hover,
+  &:active {
+    color: var(--primary-light-color);
+  }
+}
+
+:visited {
+  color: var(--primary-dark-color);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*
+  CSS Selector Specificity:
+
+  *      -> 0
+  Element (body, div, article, html), ::pseudo-element (::after, ::selection) -> 1
+  .class, :pseudo-class (:hover, :active), [attr] -> 10
+  #id    -> 100
+
+  .mainMenu a:hover -> 21
+
+  id | class | element
+  1       0       0
+
+  0     10      0
+
+  0.10.0
+  .
+  .
+  0.255.0
+  1.0.0
+*/

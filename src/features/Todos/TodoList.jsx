@@ -63,7 +63,7 @@ export function TodoList() {
     const todoTitle = formData.get('title');
 
     try {
-      const newTodo = await fetch(endpoint + 's', {
+      const newTodo = await fetch(endpoint, {
         method: 'POST',
         body: JSON.stringify({
           title: todoTitle,
