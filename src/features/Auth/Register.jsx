@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { email, flattenError, object, string } from 'zod';
+import { useAuthContext } from './AuthContext';
 
 const apiUrl = import.meta.env.VITE_API_URL + '/register';
 
