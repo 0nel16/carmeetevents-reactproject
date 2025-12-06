@@ -10,19 +10,16 @@
   ],
   "todos": [
     {
-      "id": 1,
-      "title": "Buy Milk",
-      "completed": true
-    },
-    {
+      "userId": 1,
       "title": "Learn React",
       "completed": true,
       "id": 2
     },
     {
-      "title": "This is nice",
+      "title": "Buy Milk",
       "completed": false,
-      "id": 4
+      "userId": 1,
+      "id": 3
     }
   ],
   "boardgames": [

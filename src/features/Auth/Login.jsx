@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { email, flattenError, object, string } from 'zod';
 import { useAuthContext } from './AuthContext';
+import { useNavigate } from 'react-router';
 
 const apiUrl = import.meta.env.VITE_API_URL + '/login';
 
@@ -35,7 +36,14 @@ export function Login() {
 
   const [errors, setErrors] = useState(null);
 
-  const { login } = useAuthContext();
+  const { user, login } = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(user) {
+      navigate('/');
+    }
+  }, [user, navigate])
 
   function handleInputChange(e) {
     // const newValues = {...formValues};

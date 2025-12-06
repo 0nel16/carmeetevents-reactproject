@@ -7,10 +7,21 @@ const initialContextValue = {
   user: null,
 };
 
+const storageKey = 'auth';
+
 export function AuthContextProvider({ children }) {
-  const [auth, setAuth] = useState(initialContextValue);
+  const [auth, setAuth] = useState(() => {
+    const fromStorage = localStorage.getItem(storageKey);
+
+    if(fromStorage) {
+      return JSON.parse(fromStorage);
+    }
+
+    return initialContextValue;
+  });
 
   function login(auth) {
+    localStorage.setItem(storageKey, JSON.stringify(auth))
     setAuth(auth);
   }
 

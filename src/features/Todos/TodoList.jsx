@@ -1,33 +1,45 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
+import { useAuthContext } from '../Auth/AuthContext';
+
+import styles from './Todos.module.css';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const endpoint = `${apiUrl}/todos`;
 
-function processServerResponse(res) {
+async function processServerResponse(res) {
+  const ret = await res.json();
   if (!res.ok) {
     if (res.status === 404) {
-      console.warn('Resource not found!');
+      toast.error('Resource not found!');
     }
 
-    if (res.status === 401) {
-      console.warn('Please log in');
+    if (res.status === 401 || res.status === 403) {
+      toast.error(ret);
     }
 
     throw new Error('HTTP request error!');
   }
-  return res.json();
+  return ret;
 }
 
 export function TodoList() {
   const [todos, setTodos] = useState(null);
+  const { accessToken, user } = useAuthContext();
+
+  const authHeader = useMemo(() => ({
+    Authorization: `Bearer ${accessToken}`,
+  }), [accessToken]);
 
   // READ/RETRIEVE
   useEffect(() => {
-    fetch(endpoint)
+    fetch(`${endpoint}?userId=${user.id}`, {
+      headers: authHeader,
+    })
       .then(processServerResponse)
       .then((data) => setTodos(data))
       .catch(console.warn);
-  }, []);
+  }, [authHeader, user.id]);
 
   // if(!todos) {
   //   return <strong>Loading ...</strong>;
@@ -68,9 +80,11 @@ export function TodoList() {
         body: JSON.stringify({
           title: todoTitle,
           completed: false,
+          userId: user.id,
         }),
         headers: {
           'Content-Type': 'application/json',
+          ...authHeader
         },
       }).then(processServerResponse);
 
@@ -87,7 +101,7 @@ export function TodoList() {
     // console.log(e.target.dataset.todoId);
     // console.log(todo.id);
 
-    await fetch(`${endpoint}/${todo.id}`, { method: 'DELETE' });
+    await fetch(`${endpoint}/${todo.id}`, { method: 'DELETE', headers: authHeader });
 
     const newTodoList = todos.filter((t) => t !== todo);
     setTodos(newTodoList);
@@ -102,6 +116,7 @@ export function TodoList() {
       }),
       headers: {
         'Content-Type': 'application/json',
+        ...authHeader
       },
     }).then(processServerResponse);
 
@@ -124,7 +139,7 @@ export function TodoList() {
         <ul>
           {todos.map((todo) => (
             <li key={todo.id}>
-              <label>
+              <label className={styles.todo}>
                 <input
                   type="checkbox"
                   checked={todo.completed}
