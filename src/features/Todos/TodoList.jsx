@@ -1,27 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { toast } from 'react-toastify';
 import { useAuthContext } from '../Auth/AuthContext';
+import { processServerResponse } from '../../utils';
 
 import styles from './Todos.module.css';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 const endpoint = `${apiUrl}/todos`;
-
-async function processServerResponse(res) {
-  const ret = await res.json();
-  if (!res.ok) {
-    if (res.status === 404) {
-      toast.error('Resource not found!');
-    }
-
-    if (res.status === 401 || res.status === 403) {
-      toast.error(ret);
-    }
-
-    throw new Error('HTTP request error!');
-  }
-  return ret;
-}
 
 export function TodoList() {
   const [todos, setTodos] = useState(null);
@@ -33,13 +17,13 @@ export function TodoList() {
 
   // READ/RETRIEVE
   useEffect(() => {
-    fetch(`${endpoint}?userId=${user.id}`, {
+    fetch(`${endpoint}?userId=${user?.id}`, {
       headers: authHeader,
     })
       .then(processServerResponse)
       .then((data) => setTodos(data))
       .catch(console.warn);
-  }, [authHeader, user.id]);
+  }, [authHeader, user?.id]);
 
   // if(!todos) {
   //   return <strong>Loading ...</strong>;

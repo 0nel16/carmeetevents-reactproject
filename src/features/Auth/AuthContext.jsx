@@ -26,6 +26,7 @@ export function AuthContextProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem(storageKey);
     setAuth(initialContextValue);
   }
 

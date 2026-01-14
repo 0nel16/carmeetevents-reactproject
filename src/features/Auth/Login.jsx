@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { email, flattenError, object, string } from 'zod';
+import { email, object, string } from 'zod';
 import { useAuthContext } from './AuthContext';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+import { validateForm } from '../../utils';
 
 const apiUrl = import.meta.env.VITE_API_URL + '/login';
 
@@ -14,20 +15,6 @@ const loginSchema = object({
   ),
 });
 
-function validateForm(formValues, schema) {
-  const res = schema.safeParse(formValues);
-  if (res.success !== false) {
-    return null;
-  }
-
-  const err = flattenError(res.error);
-  const errors = Object.fromEntries(
-    Object.entries(err.fieldErrors).map(([key, val]) => [key, val[0]])
-  );
-
-  return errors;
-}
-
 export function Login() {
   const [formValues, setFormValues] = useState({
     email: '',
@@ -38,12 +25,14 @@ export function Login() {
 
   const { user, login } = useAuthContext();
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   useEffect(() => {
     if(user) {
-      navigate('/');
+      const from = state?.from || '/';
+      navigate(from);
     }
-  }, [user, navigate])
+  }, [user, state, navigate])
 
   function handleInputChange(e) {
     // const newValues = {...formValues};
