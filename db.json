@@ -1,46 +1,26 @@
 {
   "users": [
     {
-      "email": "a@a.com",
-      "password": "$2a$10$GTI/KzFus5Hl.he4M.Sv0OoGrcTwJ4HZY9z1FN9h4mf65HBzJEK2S",
-      "firstName": "Paul",
-      "lastName": "Negoescu",
-      "id": 1
-    },
-    {
       "email": "onelpreda@gmail.com",
-      "password": "$2a$10$AjFzsymUHnw94H3LRQE2DucpUkxdYt.wlOaXpQQriobUmY4hGFGEy",
+      "password": "$2a$10$Bnxo5XwYpC5JOiFVpB9jduAwsGPyWTg3ZdE52qB8GJ.2H50TX8JOi",
       "firstName": "Ionel Marius",
       "lastName": "Preda",
-      "id": 2
+      "id": 1
     }
   ],
   "events": [
     {
-      "id": 1,
-      "title": "Nürburgring Trackday",
-      "date": "2026-03-10",
-      "location": "Nürburgring, Germany",
-      "category": "trackday",
-      "price": 250,
-      "capacity": 50,
-      "description": "Open trackday for sports cars. Helmets required.",
-      "imageUrl": "https://images.unsplash.com/photo-1502877338535-766e1452684a",
-      "isPublic": true,
-      "userId": 1
-    },
-    {
-      "title": "SPA",
+      "title": "Nürburgring",
       "date": "2026-01-31",
-      "location": "Belgium",
+      "location": "Germany",
       "category": "trackday",
-      "price": 10,
+      "price": 50,
       "capacity": 10,
-      "description": "Winter track day",
+      "description": "Winter Trackday",
       "imageUrl": "",
       "isPublic": true,
-      "userId": 2,
-      "id": 2
+      "userId": 1,
+      "id": 1
     }
   ]
 }
