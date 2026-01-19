@@ -26,6 +26,11 @@ export function Nav() {
             <BrandNavLink to="/events/add">Add Event</BrandNavLink>
           </li>
         )}
+        {user && (
+          <li>
+            <BrandNavLink to="/my-events">My Events</BrandNavLink>
+          </li>
+        )}
         <li>
           <BrandNavLink to="/events">Events</BrandNavLink>
         </li>

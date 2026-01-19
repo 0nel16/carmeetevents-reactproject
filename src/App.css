@@ -80,24 +80,25 @@ body {
   justify-self: start;
 }
 
-/*
-  CSS Selector Specificity:
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  *      -> 0
-  Element (body, div, article, html), ::pseudo-element (::after, ::selection) -> 1
-  .class, :pseudo-class (:hover, :active), [attr] -> 10
-  #id    -> 100
+.modal {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: min(420px, 90%);
+}
 
-  .mainMenu a:hover -> 21
-
-  id | class | element
-  1       0       0
-
-  0     10      0
-
-  0.10.0
-  .
-  .
-  0.255.0
-  1.0.0
-*/
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}

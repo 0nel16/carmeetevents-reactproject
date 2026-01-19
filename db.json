@@ -6,21 +6,54 @@
       "firstName": "Ionel Marius",
       "lastName": "Preda",
       "id": 1
+    },
+    {
+      "email": "ionelmariuspreda@gmail.com",
+      "password": "$2a$10$EmSmDfozHC4hYHb0unuXXuiW.nwxVzvTNgxWEqyMwVDyVjsswlE52",
+      "firstName": "Onel ",
+      "lastName": "Preda",
+      "id": 2
     }
   ],
   "events": [
     {
-      "title": "Nürburgring",
+      "title": "SPA",
       "date": "2026-01-31",
-      "location": "Germany",
+      "location": "Belgium",
       "category": "trackday",
-      "price": 50,
+      "price": 1,
       "capacity": 10,
-      "description": "Winter Trackday",
+      "description": "Trackday January",
       "imageUrl": "",
       "isPublic": true,
       "userId": 1,
       "id": 1
+    },
+    {
+      "title": "Adancata",
+      "date": "2026-01-30",
+      "location": "Romania",
+      "category": "trackday",
+      "price": 15,
+      "capacity": 10,
+      "description": "Zi de curse",
+      "imageUrl": "",
+      "isPublic": true,
+      "userId": 2,
+      "id": 2
+    },
+    {
+      "title": "Zandvoort",
+      "date": "2026-01-22",
+      "location": "Olanda",
+      "category": "trackday",
+      "price": 8,
+      "capacity": 10,
+      "description": "Holland Grand Prix",
+      "imageUrl": "",
+      "isPublic": true,
+      "userId": 1,
+      "id": 3
     }
   ]
 }

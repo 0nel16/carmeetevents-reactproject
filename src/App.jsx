@@ -9,6 +9,7 @@ import EventsList from "./features/Events/EventsList";
 import EventDetails from "./features/Events/EventDetails";
 import CreateEvent from "./features/Events/CreateEvent";
 import EditEvent from "./features/Events/EditEvent";
+import MyEvents from "./features/Events/MyEvents";
 
 import "./App.css";
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/events/add" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>}></Route>
           <Route path="/events/:id/edit" element={<ProtectedRoute><EditEvent /></ProtectedRoute>}></Route>
+          <Route path="/my-events" element={<ProtectedRoute><MyEvents /></ProtectedRoute>}></Route>
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
