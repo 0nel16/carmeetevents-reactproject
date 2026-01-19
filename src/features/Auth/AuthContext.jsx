@@ -30,7 +30,7 @@ export function AuthContextProvider({ children }) {
     setAuth(initialContextValue);
   }
 
-  return <AuthContext value={{ ...auth, login, logout }}>{children}</AuthContext>;
+  return <AuthContext.Provider value={{ ...auth, login, logout }}>{children}</AuthContext.Provider>;
 }
 
 export function useAuthContext() {

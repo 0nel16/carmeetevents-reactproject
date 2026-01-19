@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import { BrandNavLink } from './BrandNavLink';
-import { useAuthContext } from '../../features/Auth/AuthContext';
+import { Link } from "react-router-dom";
+import { BrandNavLink } from "./BrandNavLink";
+import { useAuthContext } from "../../features/Auth/AuthContext";
 
-import styles from './Nav.module.css';
+import styles from "./Nav.module.css";
 
 export function Nav() {
   const { user, logout } = useAuthContext();
@@ -21,6 +21,11 @@ export function Nav() {
         <li>
           <BrandNavLink to="/">Home</BrandNavLink>
         </li>
+        {user && (
+          <li>
+            <BrandNavLink to="/events/add">Add Event</BrandNavLink>
+          </li>
+        )}
         <li>
           <BrandNavLink to="/events">Events</BrandNavLink>
         </li>
@@ -28,7 +33,9 @@ export function Nav() {
         {!user && (
           <>
             <li className={styles.pushRight}>
-              <BrandNavLink className={styles.special} to="/login">Login</BrandNavLink>
+              <BrandNavLink className={styles.special} to="/login">
+                Login
+              </BrandNavLink>
             </li>
             <li>
               <BrandNavLink to="/register">Register</BrandNavLink>
@@ -37,12 +44,17 @@ export function Nav() {
         )}
 
         {user && (
-          <li className={styles.pushRight}> 
+          <li className={styles.pushRight}>
             Welcome, {user.firstName}!
-            <a href="/" onClick={(e) => {
-              e.preventDefault();
-              logout();
-            }}>Logout</a>
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                logout();
+              }}
+            >
+              Logout
+            </a>
           </li>
         )}
       </menu>

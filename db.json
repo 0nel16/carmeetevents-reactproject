@@ -6,6 +6,13 @@
       "firstName": "Paul",
       "lastName": "Negoescu",
       "id": 1
+    },
+    {
+      "email": "onelpreda@gmail.com",
+      "password": "$2a$10$AjFzsymUHnw94H3LRQE2DucpUkxdYt.wlOaXpQQriobUmY4hGFGEy",
+      "firstName": "Ionel Marius",
+      "lastName": "Preda",
+      "id": 2
     }
   ],
   "events": [
@@ -21,6 +28,19 @@
       "imageUrl": "https://images.unsplash.com/photo-1502877338535-766e1452684a",
       "isPublic": true,
       "userId": 1
+    },
+    {
+      "title": "SPA",
+      "date": "2026-01-31",
+      "location": "Belgium",
+      "category": "trackday",
+      "price": 10,
+      "capacity": 10,
+      "description": "Winter track day",
+      "imageUrl": "",
+      "isPublic": true,
+      "userId": 2,
+      "id": 2
     }
   ]
 }

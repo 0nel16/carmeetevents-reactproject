@@ -1,3 +1,0 @@
-.todo:has(input:checked) {
-  text-decoration: line-through;
-}

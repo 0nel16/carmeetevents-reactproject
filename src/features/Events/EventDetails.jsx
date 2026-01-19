@@ -20,6 +20,7 @@ export default function EventDetails() {
             <p>{event.location}</p>
             <p>{event.date}</p>
             <p>{event.description}</p>
+            <Link to={`/events/${event.id}/edit`}>Edit</Link>
         </div>
     );
 }
