@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { BrandNavLink } from './BrandNavLink';
 import { useAuthContext } from '../../features/Auth/AuthContext';
 
@@ -22,10 +22,7 @@ export function Nav() {
           <BrandNavLink to="/">Home</BrandNavLink>
         </li>
         <li>
-          <BrandNavLink to="/todos">Todos</BrandNavLink>
-        </li>
-        <li>
-          <BrandNavLink to="/boardgames">Boardgames</BrandNavLink>
+          <BrandNavLink to="/events">Events</BrandNavLink>
         </li>
 
         {!user && (

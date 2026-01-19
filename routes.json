@@ -1,5 +1,4 @@
 {
   "/users*": "/600/users$1",
-  "/todos*": "/600/todos$1",
-  "/boardgames*": "/664/boardgames$1"
+  "/events*": "/664/events$1"
 }
