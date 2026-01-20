@@ -9,17 +9,13 @@ export function Nav() {
 
   return (
     <nav className={styles.nav} aria-label="main menu">
-      <Link to="/">
-        <img
-          src="https://scoalainformala.ro/wp-content/uploads/2021/07/Logo-scoala-informala-de-it-alb.png"
-          alt="Scoala informala logo"
-          height="60"
-        />
+      <Link to="/" className={styles.logo}>
+        CarMeet Events
       </Link>
 
       <menu className={styles.mainMenu}>
         <li>
-          <BrandNavLink to="/">Home</BrandNavLink>
+          <BrandNavLink to="/events">Events</BrandNavLink>
         </li>
         {user && (
           <li>
@@ -31,9 +27,6 @@ export function Nav() {
             <BrandNavLink to="/my-events">My Events</BrandNavLink>
           </li>
         )}
-        <li>
-          <BrandNavLink to="/events">Events</BrandNavLink>
-        </li>
 
         {!user && (
           <>

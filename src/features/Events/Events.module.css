@@ -1,0 +1,62 @@
+.page {
+  padding: 16px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 12px;
+  background: white;
+}
+
+.cardTitle {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+}
+
+.meta {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.button {
+  border: 1px solid rgba(0,0,0,0.16);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: white;
+  cursor: pointer;
+}
+
+/* Desktop breakpoint */
+@media (min-width: 768px) {
+  .page { padding: 24px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Larger screens (optional but nice) */
+@media (min-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}

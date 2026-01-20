@@ -17,19 +17,6 @@
   ],
   "events": [
     {
-      "title": "SPA",
-      "date": "2026-01-31",
-      "location": "Belgium",
-      "category": "trackday",
-      "price": 1,
-      "capacity": 10,
-      "description": "Trackday January",
-      "imageUrl": "",
-      "isPublic": true,
-      "userId": 1,
-      "id": 1
-    },
-    {
       "title": "Adancata",
       "date": "2026-01-30",
       "location": "Romania",
