@@ -7,7 +7,6 @@ import styles from "./CreateEvent.module.css";
 export default function CreateEvent() {
   const navigate = useNavigate();
   const { user, accessToken } = useAuthContext();
-
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [category, setCategory] = useState("");
@@ -15,7 +14,6 @@ export default function CreateEvent() {
   const [price, setPrice] = useState("");
   const [capacity, setCapacity] = useState("");
   const [description, setDescription] = useState("");
-  const [isPublic, setIsPublic] = useState(true);
   const [errors, setErrors] = useState({});
 
   function handleSubmit(e) {
@@ -54,7 +52,6 @@ export default function CreateEvent() {
         capacity: Number(capacity),
         description,
         imageUrl,
-        isPublic,
         userId: user.id,
       }),
     })
@@ -68,7 +65,6 @@ export default function CreateEvent() {
   return (
     <div className={styles.addEventPage}>
       <h1 className={styles.addEventTitle}></h1>
-
       <form className={styles.addEventForm} onSubmit={handleSubmit}>
         <div className={styles.formGrid}>
           <input
@@ -77,13 +73,11 @@ export default function CreateEvent() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Event title"
           />
-
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
-
           <select
             className={errors.category ? styles.error : ""}
             value={category}
@@ -97,7 +91,6 @@ export default function CreateEvent() {
             <option value="expo">Expo</option>
             <option value="drift">Drift</option>
           </select>
-
           <select
             value={location}
             onChange={(e) => setLocation(e.target.value)}
@@ -111,7 +104,6 @@ export default function CreateEvent() {
                 </option>
               ))}
           </select>
-
           <input
             type="number"
             min="0"
@@ -119,7 +111,6 @@ export default function CreateEvent() {
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Price (€)"
           />
-
           <input
             type="number"
             min="1"
@@ -128,23 +119,12 @@ export default function CreateEvent() {
             placeholder="Capacity"
           />
         </div>
-
         <textarea
           className={`${styles.description} ${errors.description ? styles.error : ""}`}
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Describe the event..."
         />
-
-        <label className={styles.checkboxRow}>
-          <input
-            type="checkbox"
-            checked={isPublic}
-            onChange={(e) => setIsPublic(e.target.checked)}
-          />
-          Public event
-        </label>
-
         <button className={styles.submitBtn} type="submit">
           Create Event
         </button>

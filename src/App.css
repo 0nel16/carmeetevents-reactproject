@@ -9,6 +9,9 @@
   --highlight-color: #f23030;
   --highlight-light-color: #f28705;
   --highlight-lighter-color: #f29f05;
+  --page-bg: #f4f1ec;
+  --card-bg: #ffffff;
+  --overlay-dark: rgba(0, 0, 0, 0.55);
 }
 
 html {
@@ -21,6 +24,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   font-size: 1.6rem;
+  background-color: #898989;
 }
 
 :link {
@@ -44,7 +48,6 @@ body {
   display: grid;
   gap: 1rem;
   grid-template-columns: 150px 1fr;
-
   width: 70vw;
   margin: 0 auto;
 
@@ -61,7 +64,6 @@ body {
       [type="range"]
     ) {
     padding: 0.5rem;
-
     border: 1px solid var(--text-color);
     border-radius: 5px;
   }
@@ -112,10 +114,6 @@ body {
   min-height: 100vh;
 }
 
-.homeHero {
-  margin-bottom: 16px;
-}
-
 .homeTitle {
   margin: 0 0 8px 0;
 }
@@ -154,7 +152,7 @@ body {
 .videoOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--overlay-dark);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
   pointer-events: none;
 }
@@ -164,17 +162,13 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   font-size: clamp(3rem, 8vw, 10rem);
   font-weight: 700;
   letter-spacing: 2px;
-
-  color: rgba(255, 255, 255, 0.75); /* transparent */
+  color: color-mix(in srgb, var(--text-on-dark-color) 75%, transparent);
   text-transform: uppercase;
-
-  z-index: 2; /* peste video, sub overlay */
+  z-index: 2;
   pointer-events: none;
-
   text-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
@@ -192,8 +186,8 @@ body {
   opacity: 0.8;
   text-shadow: 0 1px 8px rgba(0,0,0,0.15);
   text-align: center;
-  color: rgba(255, 255, 255, 0.75);
-  background-color: #000000;
+  color: color-mix(in srgb, var(--text-on-dark-color) 75%, transparent);
+  background-color: #000;
 }
 
 /* Laptop / tablet */
@@ -203,5 +197,47 @@ body {
   }
 }
 
+.heroText {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 100%;
+  text-align: center;
+  font-size: clamp(2.4rem, 4vw, 4.2rem);
+  font-weight: 400;
+  letter-spacing: 0.6px;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.7);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  animation: heroFadeIn 3s ease-out forwards;
+}
 
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 12px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  .heroText {
+    position: relative;
+    overflow-wrap: break-word;
+    width: 100vw;
+    padding: 16px 16px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.9),
+      rgba(0,0,0,0.6)
+    );
+    text-align: center;
+  }
+}
 

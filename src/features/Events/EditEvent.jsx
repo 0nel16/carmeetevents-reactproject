@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../Auth/AuthContext";
+import styles from "./CreateEvent.module.css";
 
 export default function EditEvent() {
   const { id } = useParams();
@@ -41,17 +42,39 @@ export default function EditEvent() {
   if (!form) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>Edit Event</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input name="title" value={form.title} onChange={handleChange} />
-        <input name="date" type="date" value={form.date} onChange={handleChange} />
-        <input name="location" value={form.location} onChange={handleChange} />
-
-        <textarea name="description" value={form.description} onChange={handleChange} />
-
-        <button type="submit">Save</button>
+    <div className={styles.addEventPage}>
+      <h1 className={styles.addEventTitle}>Edit Event</h1>
+      <form className={styles.addEventForm} onSubmit={handleSubmit}>
+        <div className={styles.formGrid}>
+          <input
+            name="title"
+            value={form.title}
+            onChange={handleChange}
+            placeholder="Event title"
+          />
+          <input
+            type="date"
+            name="date"
+            value={form.date}
+            onChange={handleChange}
+          />
+          <input
+            name="location"
+            value={form.location}
+            onChange={handleChange}
+            placeholder="Location"
+          />
+        </div>
+        <textarea
+          className={styles.description}
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          placeholder="Describe the event..."
+        />
+        <button className={styles.submitBtn} type="submit">
+          Save changes
+        </button>
       </form>
     </div>
   );

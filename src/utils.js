@@ -29,7 +29,6 @@ export function validateForm(formValues, schema) {
   const errors = {};
   for (const fieldName in treeErr.properties) {    
     if (treeErr.properties[fieldName].properties) {
-      // in cazul in care e un obiect validat sub obiectul principal
       for (const nestedField in treeErr.properties[fieldName].properties) {        
         if(!errors[fieldName]) {
           errors[fieldName] = {};
@@ -39,7 +38,6 @@ export function validateForm(formValues, schema) {
           treeErr.properties[fieldName].properties[nestedField].errors[0];
       }
     } else {
-      // cazul in care e un singur field
       errors[fieldName] = treeErr.properties[fieldName].errors[0];
     }
   }  

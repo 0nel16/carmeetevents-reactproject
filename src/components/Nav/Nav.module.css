@@ -1,5 +1,6 @@
 .nav {
   display: flex;
+  min-height: 64px;
   gap: 2rem;
   align-items: center;
   position: sticky;
@@ -12,23 +13,16 @@
 .mainMenu {
   display: flex;
   flex-grow: 1;
-
-  margin: -.5rem 0 0 0;
   padding: 0;
-
   list-style: none;
 
-  /* CSS nesting */
   & a {
-    /* .mainMenu a { } */
     display: inline-block;
     padding: 1rem;
-
     color: inherit;
     text-decoration: none;
 
     &:hover {
-      /* .mainMenu a:hover { } */
       text-decoration: underline;
     }
 
@@ -39,21 +33,24 @@
     &.active {
       color: var(--secondary-color);
     }
-
   }
 }
 
 .pushRight {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
 .logo {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   padding: 1rem;
   font-weight: 700;
   font-size: 20px;
   letter-spacing: 0.5px;
-  color: #ffffff;
+  color: var(--text-on-dark-color);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -62,4 +59,93 @@
 .logo:hover,
 .logo:active {
   color: #ffffff;
+}
+
+.logoutBtn {
+  margin-left: 0.75rem;
+  margin-right: 0.5rem;
+  padding: 0.45rem 1rem;
+  background-color: #b74a4a;
+  border: none;
+  border-radius: 6px;
+  color: var(--text-on-dark-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logoutBtn:hover {
+  background-color: #a13f3f;
+}
+
+.burger {
+  display: none;
+  margin-left: auto;
+  margin-right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-on-dark-color);
+  cursor: pointer;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  width: 100%;
+  background: var(--primary-dark-color);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  z-index: 999;
+}
+
+.mobileMenu a {
+  padding: 1rem;
+  text-align: center;
+  color: var(--text-on-dark-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mobileMenu a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mobileLogout {
+  background: none;
+  border: none;
+  padding: 1rem;
+
+  color: var(--text-on-dark-color);
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.mobileLogout:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.userName {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.userName:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .mainMenu {
+    display: none;
+  }
+
+  .burger {
+    display: block;
+  }
 }

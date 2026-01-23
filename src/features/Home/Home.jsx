@@ -9,13 +9,8 @@ const VIDEOS = [
 export default function Home() {
   return (
     <div className="homePage">
-      <div className="homeIntro">
-        <p>
-          Discover car meets, trackdays and automotive events across Europe.
-        </p>
-      </div>
       <section className="videoGrid" aria-label="Event highlights videos">
-        {VIDEOS.map((v) => (
+        {VIDEOS.map((v, index) => (
           <div className="videoCard" key={v.id}>
             <Link to="/events" className="videoLink">
               <div className="videoFrame">
@@ -26,7 +21,12 @@ export default function Home() {
                   allowFullScreen
                   loading="lazy"
                 />
-                <div className="videoOverlay" aria-hidden="true" />
+                <div className="videoOverlay" />
+                {index === 0 && (
+                  <div className="heroText">
+                    Discover car meets, trackdays and automotive events across Europe.
+                  </div>
+                )}
                 <div className="videoLabel">{v.label}</div>
               </div>
             </Link>

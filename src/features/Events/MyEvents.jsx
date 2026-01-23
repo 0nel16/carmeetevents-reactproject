@@ -20,7 +20,6 @@ export default function MyEvents() {
       <div className={styles.headerRow}>
         <h1>My Events</h1>
       </div>
-
       {user && events.length === 0 && (
         <div className={styles.emptyState}>
           <h2>No events yet</h2>
@@ -30,7 +29,6 @@ export default function MyEvents() {
           </Link>
         </div>
       )}
-
       {user && (
         <div className={styles.grid}>
           {events.map((event) => (

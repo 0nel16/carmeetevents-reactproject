@@ -62,7 +62,6 @@
   background: rgba(255, 17, 0, 0.3);
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   .formGrid {
     grid-template-columns: 1fr;

@@ -12,6 +12,7 @@ import EventDetails from "./features/Events/EventDetails";
 import CreateEvent from "./features/Events/CreateEvent";
 import EditEvent from "./features/Events/EditEvent";
 import MyEvents from "./features/Events/MyEvents";
+import Profile from "./features/Auth/Profile";
 
 import "./App.css";
 
@@ -22,7 +23,6 @@ export default function App() {
         <Nav />
         <ToastContainer />
         <Toaster position="top-right" />
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/" element={<EventsList />} />
@@ -33,6 +33,7 @@ export default function App() {
           <Route path="/events/add" element={<ProtectedRoute><CreateEvent /></ProtectedRoute>}></Route>
           <Route path="/events/:id/edit" element={<ProtectedRoute><EditEvent /></ProtectedRoute>}></Route>
           <Route path="/my-events" element={<ProtectedRoute><MyEvents /></ProtectedRoute>}></Route>
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
