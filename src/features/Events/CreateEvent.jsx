@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../Auth/AuthContext";
+import { LOCATIONS } from "../../data/locations";
+import styles from "./CreateEvent.module.css";
 
 export default function CreateEvent() {
   const navigate = useNavigate();
@@ -8,18 +10,34 @@ export default function CreateEvent() {
 
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
+  const [category, setCategory] = useState("");
   const [location, setLocation] = useState("");
-  const [category, setCategory] = useState("meet");
-  const [price, setPrice] = useState(0);
-  const [capacity, setCapacity] = useState(10);
+  const [price, setPrice] = useState("");
+  const [capacity, setCapacity] = useState("");
   const [description, setDescription] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [isPublic, setIsPublic] = useState(true);
+  const [errors, setErrors] = useState({});
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!title || !date || !location || !description) return;
+    const newErrors = {};
+
+    if (!title) newErrors.title = true;
+    if (!date) newErrors.date = true;
+    if (!category) newErrors.category = true;
+    if (!location) newErrors.location = true;
+    if (!description) newErrors.description = true;
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
+
+    const selectedLocation = LOCATIONS[category].find(
+      (l) => l.value === location,
+    );
+
+    const imageUrl = selectedLocation?.imageUrl || "/images/default.jpg";
 
     fetch("http://localhost:3000/events", {
       method: "POST",
@@ -30,8 +48,8 @@ export default function CreateEvent() {
       body: JSON.stringify({
         title,
         date,
-        location,
         category,
+        location,
         price: Number(price),
         capacity: Number(capacity),
         description,
@@ -48,33 +66,88 @@ export default function CreateEvent() {
   }
 
   return (
-    <div>
-      <h1>Add Event</h1>
+    <div className={styles.addEventPage}>
+      <h1 className={styles.addEventTitle}></h1>
 
-      <form onSubmit={handleSubmit}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-        <input value={date} onChange={(e) => setDate(e.target.value)} type="date" />
-        <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Location" />
+      <form className={styles.addEventForm} onSubmit={handleSubmit}>
+        <div className={styles.formGrid}>
+          <input
+            className={errors.title ? styles.error : ""}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Event title"
+          />
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
-          <option value="meet">Meet</option>
-          <option value="trackday">Trackday</option>
-          <option value="cruise">Cruise</option>
-          <option value="expo">Expo</option>
-        </select>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
 
-        <input value={price} onChange={(e) => setPrice(e.target.value)} type="number" min="0" />
-        <input value={capacity} onChange={(e) => setCapacity(e.target.value)} type="number" min="1" />
+          <select
+            className={errors.category ? styles.error : ""}
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+              setLocation("");
+            }}
+          >
+            <option value="">Select category</option>
+            <option value="trackday">Trackday</option>
+            <option value="expo">Expo</option>
+            <option value="drift">Drift</option>
+          </select>
 
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
-        <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Image URL" />
+          <select
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            disabled={!category}
+          >
+            <option value="">Select location</option>
+            {category &&
+              LOCATIONS[category].map((loc) => (
+                <option key={loc.value} value={loc.value}>
+                  {loc.label}
+                </option>
+              ))}
+          </select>
 
-        <label>
-          Public
-          <input type="checkbox" checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} />
+          <input
+            type="number"
+            min="0"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder="Price (€)"
+          />
+
+          <input
+            type="number"
+            min="1"
+            value={capacity}
+            onChange={(e) => setCapacity(e.target.value)}
+            placeholder="Capacity"
+          />
+        </div>
+
+        <textarea
+          className={`${styles.description} ${errors.description ? styles.error : ""}`}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Describe the event..."
+        />
+
+        <label className={styles.checkboxRow}>
+          <input
+            type="checkbox"
+            checked={isPublic}
+            onChange={(e) => setIsPublic(e.target.checked)}
+          />
+          Public event
         </label>
 
-        <button type="submit">Create</button>
+        <button className={styles.submitBtn} type="submit">
+          Create Event
+        </button>
       </form>
     </div>
   );

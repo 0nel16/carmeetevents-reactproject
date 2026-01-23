@@ -15,32 +15,5 @@
       "id": 2
     }
   ],
-  "events": [
-    {
-      "title": "Adancata",
-      "date": "2026-01-30",
-      "location": "Romania",
-      "category": "trackday",
-      "price": 15,
-      "capacity": 10,
-      "description": "Zi de curse",
-      "imageUrl": "",
-      "isPublic": true,
-      "userId": 2,
-      "id": 2
-    },
-    {
-      "title": "Zandvoort",
-      "date": "2026-01-22",
-      "location": "Olanda",
-      "category": "trackday",
-      "price": 8,
-      "capacity": 10,
-      "description": "Holland Grand Prix",
-      "imageUrl": "",
-      "isPublic": true,
-      "userId": 1,
-      "id": 3
-    }
-  ]
+  "events": []
 }

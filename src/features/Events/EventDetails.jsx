@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { useAuthContext } from "../Auth/AuthContext";
 import toast from "react-hot-toast";
+import styles from "./Events.module.css";
 
 export default function EventDetails() {
   const { id } = useParams();
@@ -20,7 +21,11 @@ export default function EventDetails() {
         return res.json();
       })
       .then((data) => setEvent(data))
-      .catch(() => toast.error("Could not load event details", { id: "event-details-load" }));
+      .catch(() =>
+        toast.error("Could not load event details", {
+          id: "event-details-load",
+        }),
+      );
   }, [id]);
 
   if (!event) return <p>Loading...</p>;
@@ -43,31 +48,57 @@ export default function EventDetails() {
   }
 
   return (
-    <div>
-      <h1>{event.title}</h1>
-      <p>{event.location}</p>
-      <p>{event.date}</p>
-      <p>{event.description}</p>
+    <div className={styles.eventDetails}>
+      {/* HERO */}
+      <section className={styles.eventHero}>
+        <img src={event.imageUrl} alt={event.title} />
 
+        <div className={styles.eventHeroOverlay}>
+          <span className={`${styles.badge} ${styles[event.category]}`}>
+            {event.category}
+          </span>
+
+          <h1 className={styles.eventTitle}>{event.title}</h1>
+        </div>
+      </section>
+
+      {/* INFO BAR */}
+      <section className={styles.eventMeta}>
+        <div className={styles.metaItem}>📅 {event.date}</div>
+        <div className={styles.metaItem}>📍 {event.location}</div>
+        <div className={styles.metaItem}>
+          💶 {event.price === 0 ? "Free" : `€${event.price}`}
+        </div>
+        <div className={styles.metaItem}>👥 {event.capacity} spots</div>
+      </section>
+
+      {/* CONTENT */}
+      <section className={styles.eventContent}>
+        <h2>About this event</h2>
+        <p>{event.description}</p>
+      </section>
+
+      {/* OWNER ACTIONS */}
       {isOwner && (
-        <>
-          <p>
-            <Link to={`/events/${event.id}/edit`}>Edit</Link>
-          </p>
-
-          <button type="button" onClick={() => setShowConfirm(true)}>
-            Delete
+        <section className={styles.eventActions}>
+          <Link to={`/events/${event.id}/edit`} className={styles.editBtn}>
+            ✏️ Edit
+          </Link>
+          <button
+            onClick={() => setShowConfirm(true)}
+            className={styles.deleteBtn}
+          >
+            🗑 Delete
           </button>
-
-          {showConfirm && (
-            <ConfirmModal
-              title="Delete event?"
-              message="This action cannot be undone."
-              onCancel={() => setShowConfirm(false)}
-              onConfirm={handleDelete}
-            />
-          )}
-        </>
+        </section>
+      )}
+      {showConfirm && (
+        <ConfirmModal
+          title="Delete event"
+          message="Are you sure you want to delete this event?"
+          onConfirm={handleDelete}
+          onCancel={() => setShowConfirm(false)}
+        />
       )}
     </div>
   );
